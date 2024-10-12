@@ -25,7 +25,8 @@ const HomeScreen = () => {
         { products.map((product) =>(
           // 1 col on small, 2 cols on medium, 3 col on large, 4 col on XL
           <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
-            <Product product={product} />
+            {/* productAPI is the parameter from Product function in Product.jsx */}
+            <Product productAPI={product} />
           </Col>
         ))}
       </Row>
