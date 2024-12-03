@@ -6,6 +6,8 @@ import Loader from '../components/Loader'
 import Message from '../components/Message'
 
 const HomeScreen = () => {
+
+  // productAouSlice replaced fetch() with redux
 const { data: products, isLoading, error } = useGetProductsQuery();
 
 

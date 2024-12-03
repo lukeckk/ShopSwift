@@ -1,10 +1,14 @@
 import { PRODUCTS_URL } from "../constants";
 import { apiSlice } from "./apiSlice";
 
+// this is the children api slice
 // to insert builder into query
 export const productsApiSlice = apiSlice.injectEndpoints({
+
+  // builder has method for query
+  // this query will replace the fetch request to backend in HomeScreen.jsx
   endpoints: (builder) => ({
-    // redux for 
+    // get products
     getProducts: builder.query({
       query: () => ({
         url: PRODUCTS_URL,

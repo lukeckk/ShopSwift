@@ -12,6 +12,7 @@ const ProductScreen = () => {
   // renaming id to productId
   const { id: productId } = useParams();
 
+  // individual productApiSlice replacing fetch() with redux
   const { data: product, isLoading, error } = useGetProductDetailsQuery(productId);
 
   return (

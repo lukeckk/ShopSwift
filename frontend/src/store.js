@@ -3,7 +3,7 @@ import { apiSlice } from "./slices/apiSlice";
 
 // exmaple for redux
 const store = configureStore({
-  // boiler plate. one time code to set up redux
+  // boiler plate. one time code to set up redux, apiSlice added in later after setting up parent slice
   reducer: {
     [apiSlice.reducerPath]: apiSlice.reducer
   },
