@@ -25,7 +25,14 @@ const cartSlice = createSlice({
         state.cartItems = [...state.cartItems, item]
       }
 
+      // update local storage
       return updateCart(state)
+    },
+    removeFromCart: (state, action) => {
+      // instead of removing the item we want to delete, this logic returns the item we DONT want to delete, so the one we want to delete dissapear on UI
+      state.cartItems = state.cartItems.filter((x) => x._id !== action.payload )
+
+      return updateCart(state);
     }
   }
 });
@@ -34,4 +41,4 @@ const cartSlice = createSlice({
 export default cartSlice.reducer;
 
 // export to be used as UI components
-export const { addToCart } = cartSlice.actions;
+export const { addToCart, removeFromCart } = cartSlice.actions;
