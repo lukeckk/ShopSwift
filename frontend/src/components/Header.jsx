@@ -1,10 +1,14 @@
 import React from 'react'
-import { Navbar, Nav, Container } from 'react-bootstrap';
+import { Badge, Navbar, Nav, Container } from 'react-bootstrap';
 import { FaShoppingCart, FaUser } from 'react-icons/fa';
 import { LinkContainer } from 'react-router-bootstrap'
+import { useSelector } from 'react-redux'
 import logo from '../assets/logo.png'
 
-const Header = () => {
+const Header = () => {  
+  //useSelector is used to access 'initialState' in cartSlice.js
+  const { cartItems } = useSelector((state) => state.cart )  
+
   return (
     <header>
       <Navbar bg='dark' variant='dark' expand='md' collapseOnSelect>
@@ -22,6 +26,14 @@ const Header = () => {
               <LinkContainer to='/cart'>
               <Nav.Link>
                 <FaShoppingCart /> Cart
+                {
+                  cartItems.length > 0 && (
+                    <Badge pill bg='danger' style={{marginLeft:'5px'}}>
+                      {/* reduce is array function to all the total, a holds the running total, c is the qty, 0 is defaultwhere v */}
+                      {cartItems.reduce((a, c) => a + c.qty, 0 )} 
+                    </Badge>
+                  )
+                }
               </Nav.Link>
               </LinkContainer>
               
