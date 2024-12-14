@@ -13,6 +13,10 @@ connectDB();
 
 const app = express();
 
+// Body parser middleware (this will allow the object to be printed in the console such as email and password when logging in)
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }))
+
 // first route
 app.get('/', (req, res) => {
   res.send('API is running... this can be found in server.js');
