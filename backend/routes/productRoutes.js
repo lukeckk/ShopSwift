@@ -14,6 +14,8 @@ const router = express.Router();
 // }));
 
 // after updates with productController
+// /api/products
+// full route in server.js
 router.route('/').get(getProducts);
 
 // route for single product
