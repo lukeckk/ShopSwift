@@ -1,7 +1,7 @@
 import asyncHandler from "../middleware/asyncHandler.js";
 import User from "../models/userModel.js";
-import jwt from 'jsonwebtoken'
- 
+import generateToken from "../utils/generateToken.js"; 
+
 // @desc Auth user & get token
 // @route POST / api/users/login
 // @access Public 
@@ -14,17 +14,7 @@ const authUser = asyncHandler(async (req, res) => {
 
   // is user exists, return an object of the user's details && validate pasword using matchPassword() in userModel.jsnp
   if(user && (await user.matchPassword(password))) {
-    // Create a token
-    // paylod : id, secret: in env, when does the token expire (1 day is normal, 30 day is used for dev)
-    const token = jwt.sign({ userID: user._id }, process.env.JWT_SECRET, { expiresIn: '30d' });
-
-    // Set JWT as HTTP-Only cookie
-    res.cookie('jwt', token, {
-      httpOnly: true, 
-      secure: process.env.NODE_ENV !== 'development', // True if it is in production
-      sameSite: 'strict',
-      maxAge: 30 * 24 * 60 * 60 * 1000 // 30 days
-    });
+    generateToken(res, user._id);
 
     res.json({                
       _id: user._id,
@@ -38,11 +28,41 @@ const authUser = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc register user
+// @desc register user and set cookie
 // @route POST / api/users
 // @access Public 
 const registerUser = asyncHandler(async (req, res) => {
-  res.send('register user');
+  const { name, email, password } = req.body;
+
+  // check if user exists
+  const userExists = await User.find({email});
+
+  if(userExists.length > 0) {
+    res.status(400);
+    throw new Error('User already exists');
+  } 
+
+  // else create a new user and add to database using Moongoose function create()
+  const user = await User.create({
+    name,
+    email,
+    password
+  });
+
+  // if the new user exists now, repond with the info
+  if (user) {
+    generateToken(res, user._id);
+
+    res.status(201).json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      isAdmin: user.isAdmin,
+    });
+  } else {
+    res.status(400);
+    throw new Error('Invalid user data');
+  }
 });
 
 // @desc logout user and clear cookie
