@@ -1,3 +1,5 @@
+// this creates 'cart' on redux dev tool
+
 import { createSlice } from "@reduxjs/toolkit";
 import { updateCart } from "../utils/cartUtils";
 
