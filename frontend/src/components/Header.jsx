@@ -1,17 +1,31 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 import { Badge, Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
 import { FaShoppingCart, FaUser } from 'react-icons/fa';
 import { LinkContainer } from 'react-router-bootstrap'
-import { useSelector } from 'react-redux'
-import logo from '../assets/logo.png'
+import { useSelector, useDispatch } from 'react-redux';
+import { useLogoutMutation } from '../slices/usersApiSlice';
+import { logout } from '../slices/authSlice';
+import logo from '../assets/logo.png';
 
 const Header = () => {  
   //useSelector is used to access 'initialState' in cartSlice.js
   const { cartItems } = useSelector((state) => state.cart )  
   const { userInfo } = useSelector((state) => state.auth )  
 
-  const logoutHandler = () => {
-    console.log('logout');
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [logoutApiCall] = useLogoutMutation();
+
+  const logoutHandler = async () => {
+    try {
+      await logoutApiCall().unwrap(); // unwrap the mutation promise
+      dispatch(logout()); // clears local storage
+      navigate('/login') // direct to login page
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
