@@ -5,7 +5,7 @@ import { updateCart } from "../utils/cartUtils";
 
 // store cart item in local storage 
 // check local storage, if there is something, show it as JSON object, else empty
-const initialState = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : {cartItems: []};
+const initialState = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : {cartItems: [], shippingAddress: {}, paymentMethod: 'Paypal'};
 
 
 
@@ -35,6 +35,10 @@ const cartSlice = createSlice({
       state.cartItems = state.cartItems.filter((x) => x._id !== action.payload )
 
       return updateCart(state);
+    },
+    saveShippingAddress: (state, action) => {
+      state.shippingAddress = action.payload;
+      return updateCart(state);
     }
   }
 });
@@ -43,4 +47,4 @@ const cartSlice = createSlice({
 export default cartSlice.reducer;
 
 // export to be used as UI components
-export const { addToCart, removeFromCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, saveShippingAddress } = cartSlice.actions;
