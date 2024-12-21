@@ -1,4 +1,4 @@
-// This file contains the constats for URL
+// This file contains the constant URL for api slices
 
 // export const BASE_URL = process.env.NODE_ENV === 'development' ?
 // 'http://localhost:5010' : '';
