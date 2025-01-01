@@ -1,9 +1,9 @@
-# MERN Shop - Full-Stack eCommerce Platform
+# ShopSwift - Full-Stack eCommerce Platform implementing MERN Stack
 
 🚧 **Work in Progress** 🚧  
 This project is currently under development. Some features may be incomplete or subject to change.
 
-**MERN Shop** is a robust, full-stack eCommerce platform designed to provide a seamless shopping experience for users and comprehensive management capabilities for administrators. Built using the **MERN stack**, this application leverages modern web technologies to ensure responsiveness, scalability, and performance.
+**ShopSwift** is a robust, full-stack eCommerce platform designed to provide a seamless shopping experience for users and comprehensive management capabilities for administrators. Built using the **MERN stack**, this application leverages modern web technologies to ensure responsiveness, scalability, and performance.
 
 ## Key Features
 - **Frontend**: Developed with **React** for a dynamic and interactive user experience, styled using **React-Bootstrap** for a responsive and modern interface.
