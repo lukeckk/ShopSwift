@@ -6,7 +6,7 @@ import { LinkContainer } from 'react-router-bootstrap'
 import { useSelector, useDispatch } from 'react-redux';
 import { useLogoutMutation } from '../slices/usersApiSlice';
 import { logout } from '../slices/authSlice';
-import logo from '../assets/logo.png';
+import slogo from '../assets/slogo.png';
 
 const Header = () => {  
   //useSelector is used to access 'initialState' in cartSlice.js
@@ -35,8 +35,8 @@ const Header = () => {
            {/* Link container is used instead of link like in product.jsx */}
           <LinkContainer to='/'>
             <Navbar.Brand>
-              <img src={logo} alt="ProShop" />
-                ProShop
+              <img src={slogo} alt="ProShop" height='50' width='50' />
+                SwiftShop
             </Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls='basic-navbar-nav'/>
