@@ -80,11 +80,11 @@ const productSchema = new mongoose.Schema({
     required: true,
     default: 0,
   },
-    
-  }, {
-    // automatically add the createdApp field
-    timeStramps: true,
-  }
+
+}, {
+  // automatically add the createdApp field
+  timestamp: true,
+}
 );
 
 
